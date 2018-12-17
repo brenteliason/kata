@@ -5,7 +5,7 @@ public class Tests {
 	public static void main(String[] args) {
 		System.out.println("Beginning tests for word search kata...\n");
 
-
+		WordSearch example = new WordSearch();
 
 		//test that input included on command line
 		System.out.println("Checking for input file on command line...");
@@ -15,7 +15,7 @@ public class Tests {
 
 				//test that input was loaded into WordSearch object
 				System.out.println("Checking that input was properly loaded");
-				WordSearch example = new WordSearch(args[0]);
+				example.loadWordSearch(args[0]);
 				if (example.getWordSearchContents() != null) {
 					System.out.println("\tPASSED...word search contents loaded\n");
 				}
@@ -28,7 +28,15 @@ public class Tests {
 		}
 
 		//test that input is properly formatted
-		System.out.println("Checking that input is in acceptable format...");
+		//System.out.println("Checking that input is in acceptable format...");
+
+		//test that first line of input file has been converted to array of Strings
+		System.out.println("Checking for list of words to search for...");
+		if (example.getSearchWords() == null)
+			System.out.println("\tFAILED...no search words\n");
+		else
+			System.out.println("\tPASSED...search words detected\n");
+
 
 		//check for output
 		System.out.println("Checking that output is present...");
