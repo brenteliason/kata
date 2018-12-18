@@ -37,6 +37,11 @@ public class Tests {
 		else
 			System.out.println("\tPASSED...search words detected\n");
 
+		System.out.println("Checking for word search grid...");
+		if (example.getWordSearchGrid() == null)
+			System.out.println("\tFAILED...no word search grid\n");
+		else
+			System.out.println("\tPASSED...word search grid found\n");
 
 		//check for output
 		System.out.println("Checking that output is present...");
