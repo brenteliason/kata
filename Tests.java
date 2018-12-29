@@ -45,6 +45,7 @@ public class Tests {
 
 		//check for output
 		System.out.println("Checking that output is present...");
+		example.findWordsInGrid();
 
 		//check formatting of output
 		System.out.println("Checking format of output...");
