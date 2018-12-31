@@ -4,13 +4,13 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.*;
 //KATA INSTRUCTIONS SAY GRID WILL ALWAYS BE SQUARE SO ROWS WILL ALWAYS EQUAL COLUMNS
+//INSTRUCTIONS WILL ALSO SAY you can assume all words will be present in the grid (and only once?)
 public class WordSearch {
 	String inputFileContents = null;
 	ArrayList<String> wordSearchLines = new ArrayList<String>();
 	String [] searchWords = null;
 	String [][] wordSearchGrid = null;
-	int maxRows = 3;
-	int maxColumns = 3;
+	String [] solutions = null;//stores locations of search words when found
 	int rows = 0;//starting from top left equals number of rows
 	int columns = 0;//starting from top left equals number of columns
 	//String wordSearchFile;
@@ -33,13 +33,16 @@ public class WordSearch {
 			Scanner scan = new Scanner(new File(file));
 			int lineCount = 0;
 			inputFileContents = "";
-			//wordSearchGrid = new String[maxRows][maxColumns];
 			while (scan.hasNextLine() == true) {
 				String temp = "";
 				temp = scan.nextLine();//stores the raw text from the next line of the input file
 				inputFileContents += "\n" + temp;
 				if (lineCount == 0) {//FIRST LINE is the words to search for, needs different treatment than other lines that form the puzzle itself
 					searchWords = temp.split(",");
+					solutions = new String[searchWords.length];//sets solutions array to be same length as searchWords array
+					for (int i = 0; i < solutions.length; i++)
+						solutions[i] = "";
+					//System.out.println("solutions array length equals: " + solutions.length);
 				}
 				else {//add line of word search contents from file to word search grid data structure
 					wordSearchLines.add(temp);
@@ -47,7 +50,7 @@ public class WordSearch {
 					if (lineCount == 1) {
 						columns = lineToLetters.length;
 						rows = columns;
-						wordSearchGrid = new String[rows][columns];
+						wordSearchGrid = new String[columns][rows];
 					}
 
 					if (lineToLetters.length != columns) {
@@ -57,7 +60,7 @@ public class WordSearch {
 					}
 
 						for (int c = 0; c < columns; c++) {
-							wordSearchGrid[lineCount - 1][c] = lineToLetters[c];
+							wordSearchGrid[c][lineCount - 1] = lineToLetters[c];
 						}
 						/*for (int i = 0; i < columnCount; i++) {
 							wordSearchGrid[lineCount-1][i] = lineToLetters[i];
@@ -78,11 +81,11 @@ public class WordSearch {
 			//READ THE WHOLE FILE, now populate 2d array grid
 			//String[] wordSearchLinesArray = wordSearchLines.toArray();
 			//wordSearchGrid = new String[rowCount][columnCount];
-			/*for (int r = 0; r < rowCount; r++) {
-				String temp = wordSearchLines.get(r);
-				String [] lineToLetters = temp.split(",");
-				for (int c = 0; c < columnCount; c++) {
-					wordSearchGrid[r][c] = lineToLetters[c];
+			/*for (int c = 0; c < columnCount; c++) {
+					for (int r = 0; r < rowCount; r++) {
+						String temp = wordSearchLines.get(r);
+						String [] lineToLetters = temp.split(",");
+						wordSearchGrid[c][r] = lineToLetters[c];
 				}
 			}*/
 			return true;
@@ -94,29 +97,33 @@ public class WordSearch {
 	}
 
 	public boolean findWordsInGrid() {//returns true if all words are found in grid
-		for (int r = 0; r < rows; r++) {
-			for (int c = 0; c < columns; c++) {
+		for (int c = 0; c < columns; c++) {
+			for (int r = 0; r < rows; r++) {
 				for (int w = 0; w < searchWords.length; w++) {
 						//System.out.println("Does " + searchWords[w] + " start with " + wordSearchGrid[i][j]);
-					if (searchWords[w].startsWith(wordSearchGrid[r][c])) {//letter in grid matches first letter of search word, start recursive search
+					if (searchWords[w].startsWith(wordSearchGrid[c][r])) {//letter in grid matches first letter of search word, start recursive search
 						String query = searchWords[w].substring(0,1);
 						//System.out.println("Potential find of " + searchWords[w] + " starting at " + i + "," + j);
-						searchForFullWord(r,c,w,query);
+						searchForFullWord(c,r,w,query);
 					}
 				}
 			}
 		}
-		return false;
+		for (int i = 0; i < solutions.length; i++) {
+			if (solutions[i] == "")
+				return false;//one of the words was not found in the search grid
+		}
+		return true;//all of the words were found in the grid
 	}
 
-	public boolean searchForFullWord(int row, int column, int w, String prefix) {
+	public boolean searchForFullWord(int column, int row, int w, String prefix) {
 		int delta = searchWords[w].length() - 1;//
 		//search for full word starting with straight up and then moving clockwise
-		System.out.println("Checking for " + searchWords[w] + " starting at " + row + "," + column);
+		System.out.println("Checking for " + searchWords[w] + " starting at " + column + "," + row);
 		if (row - delta >= 0) {
 			//check for word going up
 			//System.out.println("\t...going up");
-			String compareWith = "";
+		/*	String compareWith = "";
 			for (int c = column; c >= (column - delta); c--) {
 					compareWith += wordSearchGrid[row][c];
 					System.out.println("Comparison string now equals: " + compareWith);
@@ -125,9 +132,9 @@ public class WordSearch {
 			if (searchWords[w] == compareWith) {
 
 				System.out.println("\n\n\t\tMATCH FOUND!!!!\n");
-			}
+			}*/
 		}
-		if (column - delta >= 0 && row + delta <= (rows - 1)) {
+		if (column - delta >= 0 && row + delta <= rows) {
 			//check for word up-right
 			//System.out.println("\t...going up-right");
 		}
@@ -137,13 +144,23 @@ public class WordSearch {
 
 			String compareWith = "";
 			for (int c = column; c <= (column + delta); c++) {
-					compareWith += wordSearchGrid[row][c];
+					compareWith += wordSearchGrid[c][row];
 					System.out.println("Comparison string now equals: " + compareWith);
 			}
 			System.out.println("Does \'" + searchWords[w] + "\' equal \'" + compareWith + "\'?");
 			if (searchWords[w].equals(compareWith)) {
 				System.out.println("\n\n\t\tMATCH FOUND!!!!\n");
 				System.out.println(searchWords[w] + " is the same as " + compareWith);
+				String matchPosition = "";
+				for (int i = 0; i < compareWith.length(); i++) {
+					matchPosition += "(" + row + "," + (column+i) + ")";
+					if (i != (searchWords.length - 1))
+						matchPosition += ",";
+				}
+				if (solutions[w] == "")
+					solutions[w] = matchPosition;//set indexed solution to equal final output for printing later and comparison in tests
+				else
+					solutions[w] += "; " + matchPosition;
 			}
 			else {
 				System.out.println("\n\tNO MATCH!!!");
@@ -151,15 +168,15 @@ public class WordSearch {
 
 		}
 
-		if (column + delta <= (maxColumns - 1) && row + delta <= (maxRows - 1)) {
+		if (column + delta <= columns && row + delta <= rows) {
 			//check for word down-right
 			//System.out.println("\t...going down-right");
 		}
-		if (column + delta <= (maxColumns - 1)) {
+		if (column + delta <= columns) {
 			//check for word going down
 			//System.out.println("\t...going down");
 		}
-		if (column + delta <= (maxRows - 1) && row - delta >= 0) {
+		if (column + delta <= rows && row - delta >= 0) {
 			//check for word down-left
 			//System.out.println("\t...going down-left");
 		}
@@ -171,8 +188,6 @@ public class WordSearch {
 			//check for word up-left
 			//System.out.println("\t...going up-left");
 		}
-
-
 
 		return false;
 	}
@@ -188,11 +203,24 @@ public class WordSearch {
 	}
 
 	public String [][] getWordSearchGrid() {
-		/*System.out.println("Printing complete word search grid:");
-		for (int i = 0; i < maxX; i++) {
-			System.out.println(String.join(",",wordSearchGrid[i]));
-		}*/
+		//System.out.println("Printing complete word search grid:");
 		//System.out.println(wordSearchGrid);
 		return wordSearchGrid;
+	}
+
+	public String getAnswers () {
+		String answers = "";
+		for (int i = 0; i < solutions.length; i++) {
+			answers += searchWords[i] + ": " + solutions[i] + "\n";
+		}
+		return answers;
+	}
+
+	public boolean hasAnswers () {
+		for (int i = 0; i < solutions.length; i++) {
+			if (solutions[i] == "")
+				return false;
+		}
+		return true;
 	}
 }

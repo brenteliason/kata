@@ -44,11 +44,26 @@ public class Tests {
 			System.out.println("\tPASSED...word search grid found\n");
 
 		//check for output
-		System.out.println("Checking that output is present...");
+		System.out.println("Checking that output is present...\n\t");
 		example.findWordsInGrid();
+		if (example.hasAnswers()) {
+			System.out.println("\tPASSED...all words found in word search");
+		}
+		else
+			System.out.println("\tFAILED...not all words were found in word search");
 
-		//check formatting of output
 		System.out.println("Checking format of output...");
+		String expected = "CAT: (1,0),(1,1),(1,2)" + "\n" +
+											 "DOG: (0,0),(0,1),(0,2)" + "\n" +
+											 "BUG: (2,0),(2,1),(2,2)";
+
+		String answers = example.getAnswers();
+		System.out.println(answers);
+
+		if (args[0] == "kata/input0.txt") {
+			if (expected.equals(answers))
+				System.out.println("Output has correct answers and correct format");
+		}
 
 		//check output results with expected results
 		System.out.println("Comparing output with expected results...");
