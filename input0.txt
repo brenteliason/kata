@@ -1,4 +1,4 @@
-CAT,DOG,BUG
-D,O,G
-C,A,T
-B,U,G
+COT,DOG,GOD
+D,T,G
+C,O,T
+D,C,G

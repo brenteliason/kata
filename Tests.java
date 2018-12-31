@@ -52,6 +52,9 @@ public class Tests {
 		else
 			System.out.println("\tFAILED...not all words were found in word search");
 
+		//check output results with expected results
+		System.out.println("Comparing output with expected results...");
+
 		System.out.println("Checking format of output...");
 		String expected = "CAT: (1,0),(1,1),(1,2)" + "\n" +
 											 "DOG: (0,0),(0,1),(0,2)" + "\n" +
@@ -64,9 +67,6 @@ public class Tests {
 			if (expected.equals(answers))
 				System.out.println("Output has correct answers and correct format");
 		}
-
-		//check output results with expected results
-		System.out.println("Comparing output with expected results...");
 
 	}
 

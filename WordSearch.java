@@ -119,42 +119,26 @@ public class WordSearch {
 	public boolean searchForFullWord(int column, int row, int w, String prefix) {
 		int delta = searchWords[w].length() - 1;//
 		//search for full word starting with straight up and then moving clockwise
-		System.out.println("Checking for " + searchWords[w] + " starting at " + column + "," + row);
+		//System.out.println("Checking for " + searchWords[w] + " starting at " + column + "," + row);
+
+
 		if (row - delta >= 0) {
 			//check for word going up
 			//System.out.println("\t...going up");
-		/*	String compareWith = "";
-			for (int c = column; c >= (column - delta); c--) {
-					compareWith += wordSearchGrid[row][c];
-					System.out.println("Comparison string now equals: " + compareWith);
-			}
-			System.out.println("Does " + searchWords[w] + " equal " + compareWith);
-			if (searchWords[w] == compareWith) {
-
-				System.out.println("\n\n\t\tMATCH FOUND!!!!\n");
-			}*/
-		}
-		if (column - delta >= 0 && row + delta <= rows) {
-			//check for word up-right
-			//System.out.println("\t...going up-right");
-		}
-		if (column + delta <= columns) {
-			//check for word going right
-			System.out.println("\t...going right");
 
 			String compareWith = "";
-			for (int c = column; c <= (column + delta); c++) {
-					compareWith += wordSearchGrid[c][row];
-					System.out.println("Comparison string now equals: " + compareWith);
+			for (int r = row; r >= (row - delta); r--) {
+					compareWith += wordSearchGrid[column][r];
+					//System.out.println("Comparison string now equals: " + compareWith);
 			}
-			System.out.println("Does \'" + searchWords[w] + "\' equal \'" + compareWith + "\'?");
+			//System.out.println("Does \'" + searchWords[w] + "\' equal \'" + compareWith + "\'?");
 			if (searchWords[w].equals(compareWith)) {
-				System.out.println("\n\n\t\tMATCH FOUND!!!!\n");
-				System.out.println(searchWords[w] + " is the same as " + compareWith);
+				//System.out.println("\tMATCH FOUND!!!!\n");
+				//System.out.println(searchWords[w] + " is the same as " + compareWith);
 				String matchPosition = "";
 				for (int i = 0; i < compareWith.length(); i++) {
-					matchPosition += "(" + row + "," + (column+i) + ")";
-					if (i != (searchWords.length - 1))
+					matchPosition += "(" + (column) + "," + (row-i) + ")";
+					if (i != (compareWith.length() - 1))
 						matchPosition += ",";
 				}
 				if (solutions[w] == "")
@@ -163,30 +147,231 @@ public class WordSearch {
 					solutions[w] += "; " + matchPosition;
 			}
 			else {
-				System.out.println("\n\tNO MATCH!!!");
+				//System.out.println("\tNO MATCH!!!");
+			}
+		}
+
+		if (column + delta < columns && row - delta >= 0) {
+			//check for word up-right
+			//System.out.println("\t...going up-right");
+
+			String compareWith = "";
+			for (int c = column, r = row; c <= (column + delta) && r >= (row - delta); c++, r--) {
+				//for (int r = row, ; r >= (row - delta); r--) {
+					//System.out.println("Adding letter at: (" + c + "," + r + ")");
+					compareWith += wordSearchGrid[c][r];
+					//System.out.println("Comparison string now equals: " + compareWith);
+				//}
+			}
+			//System.out.println("Does \'" + searchWords[w] + "\' equal \'" + compareWith + "\'?");
+			if (searchWords[w].equals(compareWith)) {
+				//System.out.println("\tMATCH FOUND!!!!\n");
+				//System.out.println(searchWords[w] + " is the same as " + compareWith);
+				String matchPosition = "";
+				for (int i = 0; i < compareWith.length(); i++) {
+					matchPosition += "(" + (column+i) + "," + (row-i) + ")";
+					if (i != (compareWith.length() - 1))
+						matchPosition += ",";
+				}
+				if (solutions[w] == "")
+					solutions[w] = matchPosition;//set indexed solution to equal final output for printing later and comparison in tests
+				else
+					solutions[w] += "; " + matchPosition;
+			}
+			else {
+				//System.out.println("\tNO MATCH!!!");
+			}
+		}
+
+		if (column + delta < columns) {
+			//check for word going right
+			//System.out.println("\t...going right");
+			/*int sum = column + delta;
+			System.out.println("column + delta = " + sum);
+			System.out.println("columns = " + columns);*/
+
+
+			String compareWith = "";
+			for (int c = column; c <= (column + delta); c++) {
+					compareWith += wordSearchGrid[c][row];
+					//System.out.println("Comparison string now equals: " + compareWith);
+			}
+			//System.out.println("Does \'" + searchWords[w] + "\' equal \'" + compareWith + "\'?");
+			if (searchWords[w].equals(compareWith)) {
+				//System.out.println("\tMATCH FOUND!!!!\n");
+				//System.out.println(searchWords[w] + " is the same as " + compareWith);
+				String matchPosition = "";
+				for (int i = 0; i < compareWith.length(); i++) {
+					matchPosition += "(" + (column+i) + "," + row + ")";
+					if (i != (compareWith.length() - 1))
+						matchPosition += ",";
+				}
+				if (solutions[w] == "")
+					solutions[w] = matchPosition;//set indexed solution to equal final output for printing later and comparison in tests
+				else
+					solutions[w] += "; " + matchPosition;
+			}
+			else {
+				//System.out.println("\tNO MATCH!!!");
 			}
 
 		}
 
-		if (column + delta <= columns && row + delta <= rows) {
+
+		if (column + delta < columns && row + delta < rows) {
 			//check for word down-right
 			//System.out.println("\t...going down-right");
+
+			String compareWith = "";
+			for (int c = column, r = row; c <= (column + delta) && r <= (row + delta); c++, r++) {
+				//for (int r = row, ; r >= (row - delta); r--) {
+					//System.out.println("Adding letter at: (" + c + "," + r + ")");
+					compareWith += wordSearchGrid[c][r];
+					//System.out.println("Comparison string now equals: " + compareWith);
+				//}
+			}
+			//System.out.println("Does \'" + searchWords[w] + "\' equal \'" + compareWith + "\'?");
+			if (searchWords[w].equals(compareWith)) {
+				//System.out.println("\tMATCH FOUND!!!!\n");
+				//System.out.println(searchWords[w] + " is the same as " + compareWith);
+				String matchPosition = "";
+				for (int i = 0; i < compareWith.length(); i++) {
+					matchPosition += "(" + (column+i) + "," + (row+i) + ")";
+					if (i != (compareWith.length() - 1))
+						matchPosition += ",";
+				}
+				if (solutions[w] == "")
+					solutions[w] = matchPosition;//set indexed solution to equal final output for printing later and comparison in tests
+				else
+					solutions[w] += "; " + matchPosition;
+			}
+			else {
+				//System.out.println("\tNO MATCH!!!");
+			}
 		}
-		if (column + delta <= columns) {
+
+
+		if (row + delta < rows) {
 			//check for word going down
 			//System.out.println("\t...going down");
+
+			String compareWith = "";
+			for (int r = row; r <= (row + delta); r++) {
+					compareWith += wordSearchGrid[column][r];
+					//System.out.println("Comparison string now equals: " + compareWith);
+			}
+			//System.out.println("Does \'" + searchWords[w] + "\' equal \'" + compareWith + "\'?");
+			if (searchWords[w].equals(compareWith)) {
+				//System.out.println("\tMATCH FOUND!!!!\n");
+				//System.out.println(searchWords[w] + " is the same as " + compareWith);
+				String matchPosition = "";
+				for (int i = 0; i < compareWith.length(); i++) {
+					matchPosition += "(" + column + "," + (row+i) + ")";
+					if (i != (compareWith.length() - 1))
+						matchPosition += ",";
+				}
+				if (solutions[w] == "")
+					solutions[w] = matchPosition;//set indexed solution to equal final output for printing later and comparison in tests
+				else
+					solutions[w] += "; " + matchPosition;
+			}
+			else {
+				//System.out.println("\tNO MATCH!!!");
+			}
+
 		}
-		if (column + delta <= rows && row - delta >= 0) {
+		if (column - delta >= 0 && row + delta < rows) {
 			//check for word down-left
 			//System.out.println("\t...going down-left");
+
+			String compareWith = "";
+			for (int c = column, r = row; c >= (column - delta) && r <= (row + delta); c--, r++) {
+				//for (int r = row, ; r >= (row - delta); r--) {
+					//System.out.println("Adding letter at: (" + c + "," + r + ")");
+					compareWith += wordSearchGrid[c][r];
+					//System.out.println("Comparison string now equals: " + compareWith);
+				//}
+			}
+			//System.out.println("Does \'" + searchWords[w] + "\' equal \'" + compareWith + "\'?");
+			if (searchWords[w].equals(compareWith)) {
+				//System.out.println("\tMATCH FOUND!!!!\n");
+				//System.out.println(searchWords[w] + " is the same as " + compareWith);
+				String matchPosition = "";
+				for (int i = 0; i < compareWith.length(); i++) {
+					matchPosition += "(" + (column-i) + "," + (row+i) + ")";
+					if (i != (compareWith.length() - 1))
+						matchPosition += ",";
+				}
+				if (solutions[w] == "")
+					solutions[w] = matchPosition;//set indexed solution to equal final output for printing later and comparison in tests
+				else
+					solutions[w] += "; " + matchPosition;
+			}
+			else {
+				//System.out.println("\tNO MATCH!!!");
+			}
 		}
-		if (row - delta >= 0) {
+
+
+		if (column - delta >= 0) {
 			//check for word left
 			//System.out.println("\t...going left");
+			String compareWith = "";
+			for (int c = column; c >= (column - delta); c--) {
+					compareWith += wordSearchGrid[c][row];
+					//System.out.println("Comparison string now equals: " + compareWith);
+			}
+			//System.out.println("Does \'" + searchWords[w] + "\' equal \'" + compareWith + "\'?");
+			if (searchWords[w].equals(compareWith)) {
+				//System.out.println("\tMATCH FOUND!!!!\n");
+				//System.out.println(searchWords[w] + " is the same as " + compareWith);
+				String matchPosition = "";
+				for (int i = 0; i < compareWith.length(); i++) {
+					matchPosition += "(" + (column-i) + "," + row + ")";
+					if (i != (compareWith.length() - 1))
+						matchPosition += ",";
+				}
+				if (solutions[w] == "")
+					solutions[w] = matchPosition;//set indexed solution to equal final output for printing later and comparison in tests
+				else
+					solutions[w] += "; " + matchPosition;
+			}
+			else {
+				//System.out.println("\tNO MATCH!!!");
+			}
 		}
+
+
 		if (row - delta >= 0 && column - delta >= 0) {
 			//check for word up-left
 			//System.out.println("\t...going up-left");
+
+			String compareWith = "";
+			for (int c = column, r = row; c >= (column - delta) && r >= (row - delta); c--, r--) {
+				//for (int r = row, ; r >= (row - delta); r--) {
+					//System.out.println("Adding letter at: (" + c + "," + r + ")");
+					compareWith += wordSearchGrid[c][r];
+					//System.out.println("Comparison string now equals: " + compareWith);
+				//}
+			}
+			//System.out.println("Does \'" + searchWords[w] + "\' equal \'" + compareWith + "\'?");
+			if (searchWords[w].equals(compareWith)) {
+				//System.out.println("\tMATCH FOUND!!!!\n");
+				//System.out.println(searchWords[w] + " is the same as " + compareWith);
+				String matchPosition = "";
+				for (int i = 0; i < compareWith.length(); i++) {
+					matchPosition += "(" + (column-i) + "," + (row-i) + ")";
+					if (i != (compareWith.length() - 1))
+						matchPosition += ",";
+				}
+				if (solutions[w] == "")
+					solutions[w] = matchPosition;//set indexed solution to equal final output for printing later and comparison in tests
+				else
+					solutions[w] += "; " + matchPosition;
+			}
+			else {
+				//System.out.println("\tNO MATCH!!!");
+			}
 		}
 
 		return false;

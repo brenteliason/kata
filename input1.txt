@@ -1,5 +1,6 @@
 CAT,ACT,TACT
-C,A,T,T
-A,T,A,C
-T,C,C,T
-A,C,T,C
+C,A,T,T,A
+A,T,A,C,T
+T,C,C,T,A
+A,A,T,C,C
+T,T,C,A,T
