@@ -8,9 +8,9 @@ The program comes with two drivers, Tests.java and Driver.java. Tests takes in a
 
 ## Quick Start (assumes you have Java installed) ##
 
-1) Download repository.
-2) Run "javac *.java" inside word-search-kata folder.
-3) Run "java kata/[Driver or Tests] [name of input file]" inside parent directory above word-search-kata folder.
+1) Download kata repository.
+2) Run "javac *.java" inside kata folder.
+3) Run "java kata/[Driver or Tests] [name of input file]" inside parent directory above kata folder.
 4) Enjoy!
 
 ## Input/Output ##
