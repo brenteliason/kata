@@ -10,7 +10,7 @@ The program comes with two drivers, Tests.java and Driver.java. Tests takes in a
 
 1) Download kata repository.
 2) Run "javac *.java" inside kata folder.
-3) Run "java kata/[Driver OR Tests] [kata/input1.txt OR kata/input2.txt]" inside parent directory above kata folder.
+3) Run "java kata/[Driver OR Tests] [kata/input0.txt OR kata/input1.txt]" inside parent directory above kata folder.
 4) Enjoy!
 
 ## Input/Output ##
@@ -56,6 +56,13 @@ SULU: (3,3),(2,2),(1,1),(0,0)
 UHURA: (4,0),(3,1),(2,2),(1,3),(0,4)
 </pre>
 
+## Included Info Files ##
+The test driver Tests.java can run with any file, but it can compare the output made by input0.txt and input1.txt with the correct answers.
+
+input0.txt is a simple 3 x 3 word search with 3 words present
+input1.txt is a bigger word search with several words provided in the kata instructions as an example
+
+The test case files demonstrate different examples of bad formatting or unusual scenarios. Numbers 1 to 6 should all make the test driver fail for various reasons. test_case7.txt contains a non-fatal error of a search word not being present. test_case8.txt contains repeat words to demonstrate that the program can detect duplicates.
 
 ## Contributions ##
 I completed this project as part of a job application process. Feel free to use or modify as you wish. If you see a problem with my code, please let me know.
