@@ -393,6 +393,10 @@ public class WordSearch {
 		return wordSearchGrid;
 	}
 
+	public String [] getSolutions () {
+			return solutions;
+	}
+
 	public String getAnswers () {
 		String answers = "";
 		for (int i = 0; i < solutions.length; i++) {

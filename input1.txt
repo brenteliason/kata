@@ -1,6 +1,4 @@
-CAT,ACT,TACT
-C,A,T,T,A
-A,T,A,C,T
-T,C,C,T,A
-A,A,T,C,C
-T,T,C,A,T
+CAT,DOG,BUG
+D,O,G
+C,A,T
+B,U,G

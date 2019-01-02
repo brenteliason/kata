@@ -1,4 +1,0 @@
-COT,DOG,GOD
-D,T,G
-C,O,T
-D,C,G
