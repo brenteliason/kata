@@ -39,12 +39,23 @@ public class WordSearch {
 				inputFileContents += "\n" + temp;
 				if (lineCount == 0) {//FIRST LINE is the words to search for, needs different treatment than other lines that form the puzzle itself
 					searchWords = temp.split(",");
-					solutions = new String[searchWords.length];//sets solutions array to be same length as searchWords array
+					for (int i = 0; i < searchWords.length; i++)
+					{
+							if (searchWords[i].length() < 2) {
+								System.out.println("IMPROPERLY FORMATTED FILE, not all search words are at least two letters");
+								return false;
+							}
+					}
+
+					if (searchWords.length > 0)//
+						solutions = new String[searchWords.length];//sets solutions array to be same length as searchWords array
+
 					for (int i = 0; i < solutions.length; i++)
 						solutions[i] = "";
 					//System.out.println("solutions array length equals: " + solutions.length);
 				}
 				else {//add line of word search contents from file to word search grid data structure
+
 					wordSearchLines.add(temp);
 					String [] lineToLetters = temp.split(",");
 					if (lineCount == 1) {
@@ -57,6 +68,11 @@ public class WordSearch {
 						System.out.println("IMPROPERLY FORMATTED FILE, word search rows don't have same number of letters");
 						return false;
 						//SHOULD THROW ERROR or exception to fail test
+					}
+
+					if (lineCount > columns) {
+						System.out.println("IMPROPERLY FORMATTED FILE, more rows than columns");
+						return false;
 					}
 
 						for (int c = 0; c < columns; c++) {
@@ -73,7 +89,7 @@ public class WordSearch {
 				lineCount++;
 			}//END OF WHILE LOOP
 
-			if (lineCount != (rows - 1)) {
+			if (columns != (lineCount - 1)) {
 				System.out.println("IMPROPERLY FORMATTED FILE, number of word search rows does not equal number of columns");
 				return false;
 			}
@@ -91,7 +107,7 @@ public class WordSearch {
 			return true;
 		}
 		catch (FileNotFoundException e) {
-			System.out.println("File not found");
+			System.out.println("***FILE NOT FOUND***");
 			return false;
 		}
 	}
@@ -405,7 +421,7 @@ public class WordSearch {
 		return answers;
 	}
 
-	public boolean hasAnswers () {
+	public boolean hasAllAnswers () {
 		for (int i = 0; i < solutions.length; i++) {
 			if (solutions[i] == "")
 				return false;

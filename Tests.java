@@ -7,7 +7,6 @@ public class Tests {
 
 		String wordSearchFile = null;
 		WordSearch example = new WordSearch();
-
 		//test that input included on command line
 		System.out.println("Checking for input file on command line...");
 		try {
@@ -15,43 +14,57 @@ public class Tests {
 				System.out.println("\tPASSED...Input file on command line\n");
 				wordSearchFile = args[0];
 				//test that input was loaded into WordSearch object
+				System.out.println("Checking that input is properly formatted");
+				boolean outcome = example.loadWordSearch(args[0]);
+				if (outcome == true)
+					System.out.println("\tPASSED...word search file is properly formatted\n");
+				else {
+					System.out.println("\tFAILED...word search file was not properly formatted\n");
+					return;
+				}
+
 				System.out.println("Checking that input was properly loaded");
-				example.loadWordSearch(args[0]);
 				if (example.getWordSearchContents() != null) {
 					System.out.println("\tPASSED...word search contents loaded\n");
 				}
-				else
+				else {
 					System.out.println("\tFAILED...word search has no contents\n");
+					return;
+				}
 			}
 		}
 		catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println("\tFAILED...No input file on command line\n");
+			System.out.println("\tFAILED...Problem with input file\n");
+			return;
 		}
-
-		//test that input is properly formatted
-		//System.out.println("Checking that input is in acceptable format...");
 
 		//test that first line of input file has been converted to array of Strings
 		System.out.println("Checking for list of words to search for...");
-		if (example.getSearchWords() == null)
+		if (example.getSearchWords() == null) {
 			System.out.println("\tFAILED...no search words\n");
+			return;
+		}
 		else
 			System.out.println("\tPASSED...search words detected\n");
 
 		System.out.println("Checking for word search grid...");
-		if (example.getWordSearchGrid() == null)
+		if (example.getWordSearchGrid() == null) {
 			System.out.println("\tFAILED...no word search grid\n");
+			return;
+		}
 		else
 			System.out.println("\tPASSED...word search grid found\n");
 
 		//check for output
 		System.out.println("Checking that output is present...");
 		example.findWordsInGrid();
-		if (example.hasAnswers()) {
+		if (example.hasAllAnswers()) {
 			System.out.println("\tPASSED...all words found in word search\n");
 		}
-		else
+		else {
 			System.out.println("\tFAILED...not all words were found in word search\n");
+			return;
+		}
 
 		//check output results with expected results
 		System.out.println("Checking answers with expected results...");
@@ -83,6 +96,8 @@ public class Tests {
 		}
 		if (wordsFoundAsExpected == true)
 			System.out.println("\tPASSED...all words found in correct position\n");
+		else
+			return;
 
 		//TESTING OVER - FINAL OUTPUT OF PROGRAM
 		System.out.println("ALL TESTS COMPLETE...now printing final output");
@@ -90,6 +105,5 @@ public class Tests {
 		String answers = example.getAnswers();
 		System.out.println(answers);
 
-	}
-
-}
+	}//END OF MAIN METHOD
+}//END OF CLASS
