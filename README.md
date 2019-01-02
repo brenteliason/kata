@@ -1,18 +1,20 @@
 Word Search Kata
 ================
-In this exercise you will build a program to complete a [word search](https://en.wikipedia.org/wiki/Word_search) problem.
+This program completes a [word search](https://en.wikipedia.org/wiki/Word_search) problem.
 
 Given a text file consisting of a list of words, and a series of rows of single-character lists representing the word search grid, this program should search for the words in the grid and return a set of x,y coordinates for each word found.
 
-The point of this kata to to provide a larger than trivial exercise that can be used to practice TDD. A significant portion of the effort will be in determining what tests should be written and, more importantly, written next.
+## Input/Output ##
 
-## Input ##
+The program accepts a file that contains a list of words and then a grid of letters. 
 
-The first line of the text file will consist of the list of words to be found.  The following lines will consist of a list of single characters, A-Z. All lines in the file except the first will have the same length, and the number of rows will match the number of characters in a line.  This input represents the square grid of the word search.
+The program assumes that all the words to be searched for will be located on the first line of the input file, capitalized, separated by commas, and at least two letters long. Following the first line, each line should contain a list of letters separated by commas making up the word search. The program assumes that the word search has an equal number of columns and rows, and that all the words located on the first line will be found in the word search horizontally, vertically, or diagonally either forwards or backwards.
 
-The grid will always be square, and all words in the list will always be present in the grid. Words may be located horizontally, vertically, diagonally, and both forwards and backwards.  Words will never "wrap" around the edges of the grid.
+The output of the program is a list of the words found in the word search with the positions of the words described with (x,y) coordinates. (0,0) is the top-left letter of the grid. The x-coordinate represents the column number from 0 to the total number of columns minus 1, while the y-coordinate represents the row number from 0 to the total number of rows minus 1. Each line of the output is formatted as follows: "WORD: (x,y),(x,y)..."
 
-The following is an example of the format of the input file:
+## EXAMPLE ##
+
+The following input: 
 
 <pre>
 BONES,KHAN,KIRK,SCOTTY,SPOCK,SULU,UHURA
@@ -33,10 +35,7 @@ W,Z,M,I,S,U,K,U,R,B,I,D,U,X,S
 K,Y,L,B,Q,Q,P,M,D,F,C,K,E,A,B
 </pre>
 
-## Output ##
-The output of the program is the location of each word found, each on a separate line.  The location will be represented as a series of x,y coordinates, where both x and y start at zero at the top-left of the grid.  From this position both x and y will increase, i.e. they will never be negative.  
-
-Given the example input above, the following output would be expected:
+produces the following output: 
 
 <pre>
 BONES: (0,6),(0,7),(0,8),(0,9),(0,10)
@@ -48,34 +47,6 @@ SULU: (3,3),(2,2),(1,1),(0,0)
 UHURA: (4,0),(3,1),(2,2),(1,3),(0,4)
 </pre>
 
-## User Stories ##
-*As the Puzzle Solver*<br />
-*I want to search horizontally*<br />
-*So that I can find words on the X axis*<br />
 
-*As the Puzzle Solver*<br />
-*I want to search vertically*<br />
-*So that I can find words on the Y axis*<br />
-
-*As the Puzzle Solver*<br />
-*I want to search diagonally descending*<br />
-*So that I can find words the descend along the X axis*<br />
-
-*As the Puzzle Solver*<br />
-*I want to search diagonally ascending*<br />
-*So that I can find words that ascend along the X axis*<br />
-
-*As the Puzzle Solver*<br />
-*I want to search backwards*<br />
-*So that I can find words in reverse along all axes*<br />
-
-## FAQ ##
-
-*It looks hard to generate test data.  How can do do this easily?*<br />
-* If you need to generate test data there are many sites which will generate puzzles for you, such as [this one](http://puzzlemaker.discoveryeducation.com/WordSearchSetupForm.asp?campaign=flyout_teachers_puzzle_wordcross).
-
-*How large can the grid be?*<br />
-* Big or small, this is really up to you as long as you remember that the grid will always be square and that your solution should meet the requirements described above. This question is really outside the scope of the kata; the point is to focus on Test-Driving and software craftsmanship.
-
-*How long or short can the words be?*<br />
-* Words will be a minimum of two letters long, and will always fit within the grid along the axis on which it can be located.
+## Contributions ##
+I completed this project as part of a job application process. Feel free to use or modify as you wish. If you see a problem with my code, please let me know.
