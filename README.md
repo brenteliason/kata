@@ -23,7 +23,7 @@ The output of the program is a list of the words found in the word search with t
 
 ## EXAMPLE ##
 
-The following input:
+The following input (input1.txt):
 
 <pre>
 BONES,KHAN,KIRK,SCOTTY,SPOCK,SULU,UHURA
@@ -59,8 +59,7 @@ UHURA: (4,0),(3,1),(2,2),(1,3),(0,4)
 ## Included Info Files ##
 The test driver Tests.java can run with any file, but it can compare the output made by input0.txt and input1.txt with the correct answers.
 
-input0.txt is a simple 3 x 3 word search with 3 words present
-input1.txt is a bigger word search with several words provided in the kata instructions as an example
+input0.txt is a simple 3 x 3 word search with 3 words present. input1.txt is a bigger word search with several words provided in the kata instructions as an example (the input and output are shown above in the Example section).
 
 The test case files demonstrate different examples of bad formatting or unusual scenarios. Numbers 1 to 6 should all make the test driver fail for various reasons. test_case7.txt contains a non-fatal error of a search word not being present. test_case8.txt contains repeat words to demonstrate that the program can detect duplicates.
 
