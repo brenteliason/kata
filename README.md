@@ -10,12 +10,12 @@ The program comes with two drivers, Tests.java and Driver.java. Tests takes in a
 
 1) Download kata repository.
 2) Run "javac *.java" inside kata folder.
-3) Run "java kata/[Driver or Tests] [input file path]" inside parent directory above kata folder.
+3) Run "java kata/[Driver OR Tests] [kata/input1.txt OR kata/input2.txt]" inside parent directory above kata folder.
 4) Enjoy!
 
 ## Input/Output ##
 
-The program accepts a file that contains a list of words and then a grid of letters. 
+The program accepts a file that contains a list of words and then a grid of letters.
 
 The program assumes that all the words to be searched for will be located on the first line of the input file, capitalized, separated by commas, and at least two letters long. Following the first line, each line should contain a list of letters separated by commas making up the word search. The program assumes that the word search has an equal number of columns and rows, and that all the words located on the first line will be found in the word search horizontally, vertically, or diagonally either forwards or backwards.
 
@@ -23,7 +23,7 @@ The output of the program is a list of the words found in the word search with t
 
 ## EXAMPLE ##
 
-The following input: 
+The following input:
 
 <pre>
 BONES,KHAN,KIRK,SCOTTY,SPOCK,SULU,UHURA
@@ -44,7 +44,7 @@ W,Z,M,I,S,U,K,U,R,B,I,D,U,X,S
 K,Y,L,B,Q,Q,P,M,D,F,C,K,E,A,B
 </pre>
 
-produces the following output: 
+produces the following output:
 
 <pre>
 BONES: (0,6),(0,7),(0,8),(0,9),(0,10)
