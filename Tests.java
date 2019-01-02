@@ -67,13 +67,13 @@ public class Tests {
 		String [] expected = new String[wordPositions.length];
 		boolean knownFile = false;
 
-		if (wordSearchFile.equals("kata/input1.txt")) {
+		if (wordSearchFile.equals("kata/input0.txt")) {
 			expected[0] = "(0,1),(1,1),(2,1)";
 			expected[1] = "(0,0),(1,0),(2,0)";
 			expected[2] = "(0,2),(1,2),(2,2)";
 			knownFile = true;
 		}
-		if (wordSearchFile.equals("kata/input2.txt")) {
+		if (wordSearchFile.equals("kata/input1.txt")) {
 			expected[0] = "(0,6),(0,7),(0,8),(0,9),(0,10)";
 			expected[1] = "(5,9),(5,8),(5,7),(5,6)";
 			expected[2] = "(4,7),(3,7),(2,7),(1,7)";
