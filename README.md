@@ -10,7 +10,7 @@ The program comes with two drivers, Tests.java and Driver.java. Tests takes in a
 
 1) Download kata repository.
 2) Run "javac *.java" inside kata folder.
-3) Run "java kata/[Driver or Tests] [name of input file]" inside parent directory above kata folder.
+3) Run "java kata/[Driver or Tests] [input file path]" inside parent directory above kata folder.
 4) Enjoy!
 
 ## Input/Output ##
