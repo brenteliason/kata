@@ -4,6 +4,15 @@ This program completes a [word search](https://en.wikipedia.org/wiki/Word_search
 
 Given a text file consisting of a list of words, and a series of rows of single-character lists representing the word search grid, this program should search for the words in the grid and return a set of x,y coordinates for each word found.
 
+The program comes with two drivers, Tests.java and Driver.java. Tests takes in a file on the command line, runs a series of tests, and then prints the locations of the words found in the word search. Driver takes in a file on the command line, skips the tests, and just prints out the locations of the words found in the word search. You can rule either with the input files provided or with another one of your marking provided it complies with the requirements outlined below.
+
+## Quick Start (assumes you have Java installed) ##
+
+1) Download repository
+2) Run "javac *.java" inside word-search-kata folder
+3) In directory above word-search-kata folder, run java word-search-kata/[Driver or Tests] [name of input file] 
+4) Enjoy
+
 ## Input/Output ##
 
 The program accepts a file that contains a list of words and then a grid of letters. 
